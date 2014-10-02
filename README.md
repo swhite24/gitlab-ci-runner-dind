@@ -3,7 +3,7 @@
 Exposes [gitlab-ci-runner](https://github.com/gitlabhq/gitlab-ci-runner) within a docker-capable docker container, courtesy [jpetazzo/dind](https://github.com/jpetazzo/dind).  Due to current issues with disk space usage in running the docker daemon within a docker container, I recommend to bind mount the unix socket from the host machine into the container.
 
 ## Base Image
-[ubuntu:1404](https://registry.hub.docker.com/_/ubuntu/)
+[ubuntu:14.04](https://registry.hub.docker.com/_/ubuntu/)
 
 ## Installation
 
