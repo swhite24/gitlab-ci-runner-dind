@@ -1,11 +1,20 @@
 # gitlab-ci-runner
 
-# Start from latest docker-in-docker
-from        jpetazzo/dind
+from        ubuntu:14.04
 maintainer  swhite24 "swhitewvu24@gmail.com"
 
-# Update your packages and install the ones that are needed to compile Ruby
-RUN apt-get update -y
+# Let's start with some basic stuff.
+RUN apt-get update -qqy
+RUN apt-get install -qqy iptables ca-certificates lxc
+
+# Install Docker from Docker Inc. repositories.
+RUN apt-get install -qqy apt-transport-https
+RUN echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+RUN apt-get update -qq
+RUN apt-get install -qqy lxc-docker
+
+# Install ruby deps
 RUN apt-get install -y curl libxml2-dev libxslt-dev libcurl4-openssl-dev libreadline6-dev libssl-dev patch build-essential zlib1g-dev openssh-server libyaml-dev libicu-dev
 
 # Download Ruby and compile it

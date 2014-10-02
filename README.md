@@ -1,9 +1,9 @@
 # gitlab-ci-runner-dind
 
-Exposes [gitlab-ci-runner](https://github.com/gitlabhq/gitlab-ci-runner) within a docker-capable docker container, courtesy [jpetazzo/dind](https://github.com/jpetazzo/dind).  Setup with no images in container, ready to be customized.
+Exposes [gitlab-ci-runner](https://github.com/gitlabhq/gitlab-ci-runner) within a docker-capable docker container, courtesy [jpetazzo/dind](https://github.com/jpetazzo/dind).  Due to current issues with disk space usage in running the docker daemon within a docker container, I recommend to bind mount the unix socket from the host machine into the container.
 
 ## Base Image
-[jpetazzo/dind](https://github.com/jpetazzo/dind)
+[ubuntu:1404](https://registry.hub.docker.com/_/ubuntu/)
 
 ## Installation
 
@@ -14,5 +14,5 @@ Exposes [gitlab-ci-runner](https://github.com/gitlabhq/gitlab-ci-runner) within 
 
 ## Usage
 
-To start the runner, choose one of `setup_and_run`, `setup`, and `run`.  
-`docker run --privileged -i -t -e LOG=file swhite24/gitlab-ci-runner-dind /gitlab-ci-runner/bin/setup_and_run`
+To start the runner, either run `setup_and_run`, or run `setup` then `run` in a shell.  
+`docker run --privileged -i -t -v /var/run/docker.sock:/var/run/docker.sock swhite24/gitlab-ci-runner-dind`
